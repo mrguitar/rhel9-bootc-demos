@@ -1,0 +1,33 @@
+#FROM ubi9/ubi-init
+#FROM quay.io/mrguitar/rhel-94-soe-bootc
+#FROM localhost/rhel-93-bootc
+FROM quay.io/centos-boot/centos-tier-1-dev:stream9
+
+
+#Likely won't need in the future
+#RUN rm /usr/local && mkdir /usr/local
+#Add nvidia repos and 93 repos to pull the matching kernel & kmods
+ADD cuda-rhel9.repo /etc/yum.repos.d/cuda-rhel9.repo
+ADD rhel93.repo /etc/yum.repos.d/rhel9.repo
+
+#commenting this as the release automation at NV doesn't support CS9
+#ADD c9s.repo /etc/yum.repos.d/c9s.repo
+
+
+#download kernel rpms and add dnf plugins to do so
+RUN rm -f /etc/yum.repos.d/centos.repo && dnf -y install dnf-plugins-core && dnf -y download kernel-modules-core-5.14.0-362.8.1.el9_3.x86_64 kernel-core-5.14.0-362.8.1.el9_3.x86_64 kernel-modules-5.14.0-362.8.1.el9_3.x86_64 kernel-5.14.0-362.8.1.el9_3.x86_64 && ls *.rpm
+
+#swap the kernel
+RUN rpm-ostree override replace kernel{,-core,-modules-core,-modules}-5.14.0-362.8.1.el9_3.x86_64.rpm
+
+#installing the nvidia rpms gives an error around modularity and not finding the appropriate kmods. I'm guessing maybe the override/replace requires an intermediate container build for the new kernel to be "seen"
+
+#failed attempt to stop from doing an intermediate container build/commit. :)
+#RUN dnf -y install kernel-modules-core-5.14.0-362.8.1.el9_3.x86_64 kernel-core-5.14.0-362.8.1.el9_3.x86_64 kernel-modules-5.14.0-362.8.1.el9_3.x86_64 kernel-5.14.0-362.8.1.el9_3.x86_64
+#RUN dnf install -y nvidia-driver-545.23.08-1.el9.x86_64 && rm /var/log/*.log /var/lib/dnf -rf 
+RUN dnf install -y nvidia-driver && rm /var/log/*.log /var/lib/dnf -rf 
+
+
+#another workaround that likely isn't needed.
+#RUN rm -rf var/lib/xkb/README.compiled
+RUN ostree container commit
