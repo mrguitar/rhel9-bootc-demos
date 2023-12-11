@@ -1,19 +1,14 @@
 #FROM ubi9/ubi-init
 #FROM quay.io/mrguitar/rhel-94-soe-bootc
-FROM localhost/rhel-93-bootc
+#FROM localhost/rhel-93-bootc
 #FROM quay.io/centos-boot/centos-tier-1-dev:stream9
-
-
-#rpm-ostree workaround
-RUN rm /usr/local && mkdir /usr/local
-
+FROM quay.io/cgwalters/centos-bootc-dev:stream9
 
 ADD cuda-rhel9.repo /etc/yum.repos.d/cuda-rhel9.repo
-ADD rhel9.repo /etc/yum.repos.d/rhel9.repo
+ADD rhel93.repo /etc/yum.repos.d/rhel9.repo
 
 #add nvidia drivers (requires either a released rhel kernel in the base image or dkms) and cuda toolkit
 RUN dnf install -y nvidia-driver nvidia-gds cuda-toolkit && rm /var/log/*.log /var/lib/dnf -rf 
 
 #rpm-ostree workaround
 #RUN rm -rf var/lib/xkb/README.compiled
-RUN ostree container commit
