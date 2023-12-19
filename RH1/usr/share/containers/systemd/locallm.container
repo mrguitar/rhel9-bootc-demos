@@ -1,0 +1,12 @@
+[Unit]
+Description=Local LLM
+
+[Container]
+Image=quay.io/michaelclifford/locallm:v0.0.9-x86-cuda
+PublishPort=7860:7860
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

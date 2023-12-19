@@ -1,0 +1,5 @@
+FROM quay.io/cgwalters/ostest:nv-cloud
+
+ADD usr usr
+ADD etc etc
+
