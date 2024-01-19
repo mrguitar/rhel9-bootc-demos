@@ -1,0 +1,16 @@
+[Service]
+Restart=always
+ExecStartPre=-/bin/mkdir -p /opt/appdata/boinc/slots
+ExecStartPre=-/bin/mkdir -p /opt/appdata/boinc/locale
+
+[Container]
+ContainerName=boinc
+Image=docker.io/boinc/client:latest
+Label="io.containers.autoupdate=image"
+Network=host
+PublishPort=31416:31416
+Timezone=local
+Volume=/opt/appdata/boinc:/var/lib/boinc:Z
+
+[Install]
+WantedBy=default.target

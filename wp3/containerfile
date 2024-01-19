@@ -1,0 +1,32 @@
+#FROM ubi9/ubi-init
+#FROM quay.io/mrguitar/rhel-94-soe-bootc
+#FROM quay.io/centos-boot/centos-tier-1-dev:stream9
+#FROM quay.io/centos-bootc/centos-bootc-dev:stream9
+FROM quay.io/centos-bootc/fedora-bootc-dev:eln
+
+#ADD rhel9.repo /etc/yum.repos.d/rhel9.repo
+RUN dnf install -y httpd mariadb mariadb-server php-fpm php-mysqlnd vim-enhanced && rm /var/log/*.log /var/lib/dnf -rf 
+ADD lamp.local-2023-03-09-0123.sql /var/local/
+ADD wp.tgz /var/www/html
+
+#Create DB and restore dump:
+#RUN mysqld_safe & until mysqladmin ping; do sleep 1; done && \
+#    mysql -e "CREATE DATABASE wp DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;" && \
+#    mysql -e "GRANT ALL PRIVILEGES ON wp.* TO 'wpuser'@'localhost' IDENTIFIED BY 'redhat';"
+#RUN     mysqld_safe & until mysqladmin ping; do sleep 1; done && \
+#RUN     mysqld_safe && \
+#	ps -eux && \
+#        mkdir -p /var/lib/mysql/ && \
+#        mysql -e "SOURCE /tmp/lamp.local-2023-03-09-0123.sql;"
+#RUN     mysqladmin shutdown
+
+#RUN mariadb start mariadb -u root <<-EOF
+#CREATE DATABASE wp DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+#GRANT ALL ON wp.* TO 'wpuser'@'localhost' IDENTIFIED BY 'redhat';
+#FLUSH PRIVILEGES;
+#EOF
+ADD wp-setup.service /etc/systemd/system/
+ADD --chmod=755 wp-setup.sh /etc
+RUN systemctl enable httpd mariadb wp-setup php-fpm
+#CMD /usr/sbin/init
+#RUN ostree container commit

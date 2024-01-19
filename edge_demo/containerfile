@@ -1,0 +1,7 @@
+FROM quay.io/centos-bootc/centos-bootc-dev:stream9
+
+ADD usr usr
+ADD etc etc
+
+RUN systemctl enable boinc-project.service
+

@@ -1,0 +1,14 @@
+[Unit]
+Description=join boinc server on first boot
+Wants=network-online.target
+After=network-online.target
+Requires=container-boinc.service
+ConditionPathExists=!/opt/appdata/boinc/master_boinc.bakerlab.org_rosetta.xml
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 50
+ExecStart=podman exec boinc boinccmd --project_attach https://boinc.bakerlab.org/rosetta/ 40c1907d56d2ee3fd42ec3a51ed53d45
+[Install]
+WantedBy=default.target
+

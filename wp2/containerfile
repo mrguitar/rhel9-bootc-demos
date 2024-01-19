@@ -1,0 +1,13 @@
+#FROM ubi9/ubi-init
+#FROM quay.io/mrguitar/rhel-94-soe-bootc
+FROM quay.io/centos-boot/centos-tier-1-dev:stream9
+
+#ADD rhel9.repo /etc/yum.repos.d/rhel9.repo
+RUN dnf install -y httpd mariadb mariadb-server php-fpm php-mysqlnd vim-enhanced && rm /var/log/*.log /var/lib/dnf -rf 
+ADD lamp.local-2023-03-09-0123.sql /tmp
+ADD wp.tgz /var/www/
+ADD wp-setup.service dir-setup.service /etc/systemd/system/
+ADD --chmod=755 wp-setup.sh dir-setup.sh /etc
+RUN systemctl enable httpd mariadb wp-setup php-fpm dir-setup
+#CMD /usr/sbin/init
+RUN ostree container commit

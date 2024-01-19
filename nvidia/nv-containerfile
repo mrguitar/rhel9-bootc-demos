@@ -1,7 +1,8 @@
 #FROM ubi9/ubi-init
 #FROM quay.io/mrguitar/rhel-94-soe-bootc
 #FROM localhost/rhel-93-bootc
-FROM quay.io/centos-boot/centos-tier-1-dev:stream9
+#FROM quay.io/centos-boot/centos-tier-1-dev:stream9
+FROM quay.io/cgwalters/centos-bootc-dev:stream9
 
 
 #Likely won't need in the future

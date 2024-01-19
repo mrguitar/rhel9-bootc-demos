@@ -1,0 +1,16 @@
+{
+  "blueprint": {
+    "customizations": {
+      "user": [
+        {
+          "name": "core",
+          "password": "redhat",
+          "key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6M7NmgtRZkn08Dkyu8xMP0mYDSzmN1qeMoWp43Sv8fmASjLUj8XE+cC3hyvUmzqJwEv0OPWqq9a8nYdye1wMBk0xRTE9lVlAUF4FZwHw1yBXYMb6h/oTQ69eF2YxnVsrk6W6ggMfxHnLa6LHCHzPQrp9SyhVg/jQAdnF+qoQdS2ZynRWY/fnQg05obMff0+gQwolbrTUF3a9JDbwUkrFXwSGVvC2kMEgAhcd9Ii1iPw186A8XUXQS1bDXo+QjdCk4Gtm0CwMCkVdhJImNqXV6/Es3znXFEUaw1VPWx9Vhx3Q/BM3wmDEXQiXHppJ4zT+BzKXuCH+LB3bbXrR+oqAmvSdG4uu7vcMdy/9bEtOd90uv9xs51CLFEzMPTN6zz8V/7nZLvrRWjL5k1F3cSxKvCirdb26uSDLSHqu7qCKXVdn0LShgHA0FSzifyA14w5WR9/GG09DQYiVPaYUwNPk2u9tYPPJsgbJFMyCbttoTcshKkgEXIZesxIZwL5UgYS8= bbreard@comacho",
+          "groups": [
+            "wheel"
+          ]
+        }
+      ]
+    }
+  }
+}
