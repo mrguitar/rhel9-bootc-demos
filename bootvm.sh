@@ -1,20 +1,28 @@
 #!/bin/bash
 #
-sudo virsh destroy bootc
-sudo virsh undefine bootc --remove-all-storage --keep-nvram
+sudo virsh destroy fedora-bootc
+sudo virsh undefine fedora-bootc --remove-all-storage --keep-nvram
 
-sudo qemu-img create -f qcow2 /var/home/bbreard/data/images/bootc.qcow2 20G
 sudo virt-install \
-  --name bootc \
-  --memory 4096 \
+  --name fedora-bootc \
   --vcpus 4 \
-  --disk=path=/var/home/bbreard/data/images/bootc.qcow2 \
-  --location https://dl.fedoraproject.org/pub/fedora/linux/releases/38/Everything/x86_64/os/ \
-  --os-variant rhel9.0 \
+  --memory 4096 \
   --boot loader=/usr/share/edk2/ovmf/OVMF_CODE.fd,loader.readonly=yes,loader.secure=no,loader.type=pflash,nvram=/var/lib/libvirt/qemu/nvram/bootc.fd \
-  --initrd-inject /var/home/bbreard/src/rhel9-bootc/example.ks \
-  --extra-args="inst.profile=rhel inst.ks=file:/example.ks" 
-  #--extra-args="inst.profile=rhel inst.ks=file:/example.ks console=tty0 console=ttyS0,115200n8" 
+  --import --disk ../output/quad/qcow2/disk.qcow2,format=qcow2 \
+  --os-variant fedora-eln
+
+#sudo qemu-img create -f qcow2 /var/home/bbreard/data/images/bootc.qcow2 20G
+#sudo virt-install \
+#  --name bootc \
+#  --memory 4096 \
+#  --vcpus 4 \
+#  --disk=path=/var/home/bbreard/data/images/bootc.qcow2 \
+#  --location https://dl.fedoraproject.org/pub/fedora/linux/releases/38/Everything/x86_64/os/ \
+#  --os-variant rhel9.0 \
+#  --boot loader=/usr/share/edk2/ovmf/OVMF_CODE.fd,loader.readonly=yes,loader.secure=no,loader.type=pflash,nvram=/var/lib/libvirt/qemu/nvram/bootc.fd \
+#  --initrd-inject /var/home/bbreard/src/rhel9-bootc/example.ks \
+#  --extra-args="inst.profile=rhel inst.ks=file:/example.ks" 
+#  --extra-args="inst.profile=rhel inst.ks=file:/example.ks console=tty0 console=ttyS0,115200n8" 
 #  --boot uefi,loader.secure=false \
 
 #exec virt-install --connect qemu:///system --name sagano-demo --memory 2048 --vcpus 4 --disk size=40 \

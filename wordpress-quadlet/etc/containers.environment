@@ -1,0 +1,13 @@
+MARIADB_DATABASE=wordpress
+MARIADB_USER=wordpress
+MARIADB_ROOT_PASSWORD=mariadb-needs-a-secure-password
+MARIADB_PASSWORD=wordpress-needs-a-secure-password
+MYSQL_DATABASE=wordpress
+MYSQL_USER=wordpress
+MSQL_ROOT_PASSWORD=mariadb-needs-a-secure-password
+MYSQL_PASSWORD=wordpress-needs-a-secure-password
+WORDPRESS_DB_HOST=mariadb
+WORDPRESS_DB_USER=wordpress
+WORDPRESS_DB_PASSWORD=wordpress-needs-a-secure-password
+WORDPRESS_DB_NAME=wordpress
+

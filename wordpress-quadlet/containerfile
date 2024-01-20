@@ -1,0 +1,6 @@
+FROM quay.io/centos-bootc/centos-bootc-dev:stream9
+#FROM quay.io/centos-bootc/fedora-bootc-dev:eln
+
+ADD usr usr
+ADD etc etc
+

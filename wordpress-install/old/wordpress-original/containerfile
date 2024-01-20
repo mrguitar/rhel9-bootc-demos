@@ -1,0 +1,10 @@
+FROM quay.io/centos-bootc/centos-bootc-dev:stream9
+
+RUN dnf install -y httpd mariadb mariadb-server php-fpm php-mysqlnd vim-enhanced && rm /var/log/*.log /var/lib/dnf -rf 
+ADD lamp.local-2023-03-09-0123.sql /etc
+ADD wp.tgz /etc/www
+ADD wp-setup.service dir-setup.service /etc/systemd/system/
+ADD --chmod=755 wp-setup.sh dir-setup.sh /etc
+RUN systemctl enable httpd mariadb wp-setup php-fpm dir-setup
+
+RUN ostree container commit
