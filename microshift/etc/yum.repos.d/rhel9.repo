@@ -1,0 +1,23 @@
+[rhel-9-baseos-rpms]
+name = Red Hat Enterprise Linux 9 - BaseOS
+baseurl = http://download.devel.redhat.com/rhel-9/nightly/RHEL-9/latest-RHEL-9/compose/BaseOS/x86_64/os/ 
+enabled = 0
+gpgcheck = 0
+
+[rhel-9-appstream-rpms]
+name = Red Hat Enterprise Linux 9 Application Stream
+baseurl = http://download.devel.redhat.com/rhel-9/nightly/RHEL-9/latest-RHEL-9/compose/AppStream/x86_64/os/ 
+enabled = 0
+gpgcheck = 0
+
+[rhel-9-FDP-rpms]
+name = Red Hat Enterprise Linux 9 Fast Datapath
+baseurl = https://download.eng.rdu.redhat.com/rhel-9/nightly/FDP/latest-FDP-9-RHEL-9/compose/Server/x86_64/os/
+enabled = 0
+gpgcheck = 0
+
+[rhel-9-FDP-rpms]
+name = Red Hat Enterprise Linux 9 Fast Datapath
+baseurl = https://download.eng.rdu.redhat.com/rhel-9/nightly/FDP/latest-FDP-9-RHEL-9/compose/Server/x86_64/os/
+enabled = 0
+gpgcheck = 0

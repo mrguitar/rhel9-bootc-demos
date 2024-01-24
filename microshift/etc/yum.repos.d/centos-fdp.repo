@@ -1,0 +1,13 @@
+# CentOS-NFV-OpenvSwitch.repo
+#
+# Please see http://wiki.centos.org/SpecialInterestGroup/NFV for more
+# information
+
+[centos-nfv-openvswitch]
+name=CentOS Stream $releasever - NFV OpenvSwitch
+metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-sig-openvswitch-2-$stream&arch=$basearch&protocol=https,http
+gpgcheck=0
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-NFV
+module_hotfixes=1
+

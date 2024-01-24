@@ -1,0 +1,5 @@
+[rhocp-4.14]
+name=Red Hat OpenShift Container Platform 4.14
+baseurl=http://192.168.81.20/rhocp-4.14-for-rhel-9-x86_64-rpms/Packages/
+gpgcheck=0
+enabled=1

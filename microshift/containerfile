@@ -1,0 +1,17 @@
+FROM quay.io/centos-bootc/centos-bootc-dev:stream9
+#FROM quay.io/centos-bootc/fedora-bootc-dev:eln
+ADD etc/yum.repos.d /etc/yum.repos.d
+RUN dnf install -y microshift
+
+ADD usr usr
+ADD etc etc
+RUN ln -s microshift.service /usr/lib/systemd/system/default.target.wants
+#firewall-cmd --permanent --zone=trusted --add-source=10.42.0.0/16
+#firewall-cmd --permanent --zone=trusted --add-source=169.254.169.1
+#firewall-cmd --reload
+#systemctl enable microshift
+    
+#remote access:
+#firewall-cmd --permanent --zone=public --add-port=6443/tcp && sudo firewall-cmd --reload
+    
+    
