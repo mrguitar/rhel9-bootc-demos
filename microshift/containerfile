@@ -6,12 +6,8 @@ RUN dnf install -y microshift
 ADD usr usr
 ADD etc etc
 RUN ln -s microshift.service /usr/lib/systemd/system/default.target.wants
-#firewall-cmd --permanent --zone=trusted --add-source=10.42.0.0/16
-#firewall-cmd --permanent --zone=trusted --add-source=169.254.169.1
-#firewall-cmd --reload
-#systemctl enable microshift
-    
+firewall-offline-cmd --permanent --zone=trusted --add-source=10.42.0.0/16
+firewall-offline-cmd --permanent --zone=trusted --add-source=169.254.169.1
 #remote access:
-#firewall-cmd --permanent --zone=public --add-port=6443/tcp && sudo firewall-cmd --reload
-    
-    
+firewall-offline-cmd --permanent --zone=public --add-port=6443/tcp
+#systemctl enable microshift
