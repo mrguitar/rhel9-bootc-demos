@@ -3,15 +3,8 @@ text
 # Basic partitioning
 zerombr
 clearpart --all --initlabel --disklabel=gpt
-#part prepboot  --size=4    --fstype=prepboot
-#part biosboot  --size=1    --fstype=biosboot
 part /boot/efi --size=100  --fstype=efi
 part /boot     --size=1000  --fstype=ext4 --label=boot
-#part / --grow --fstype xfs
-#part /boot/efi --fstype=efi --size=200
-#part /boot --fstype=xfs --asprimary --size=800
-# Uncomment this line to add a SWAP partition of the recommended size
-#part swap --fstype=swap --recommended
 part pv.01 --grow
 volgroup rhel pv.01
 logvol / --vgname=rhel --fstype=xfs --size=10000 --name=root
